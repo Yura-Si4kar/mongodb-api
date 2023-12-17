@@ -41,7 +41,7 @@ categories.forEach((category) => {
 })
 
 const Tables = mongoose.model('tables', tablesSchema);
-const Personnels= mongoose.model('personnel', personnelsSchema);
+const Personnels= mongoose.model('personnels', personnelsSchema);
 const Sales= mongoose.model('sales', salesSchema);
 
 module.exports = {...Models, Tables, Personnels, Sales};

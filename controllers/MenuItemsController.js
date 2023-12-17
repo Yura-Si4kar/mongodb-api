@@ -1,9 +1,13 @@
-const { Bbqs } = require('../models/model');
+const Models = require('../models/model');
 const ApiError = require('../error/ApiError');
 
-class BbqsController {
+class MenuItemsController {
+    constructor(category) {
+        this.Model = Models[category];
+    }
+    
     async create(req, res) {
-        const bbqs = new Bbqs(req.body);
+        const bbqs = new this.Model(req.body);
         bbqs
             .save()
             .then((result) => {
@@ -17,7 +21,7 @@ class BbqsController {
     }
 
     async getAll(req, res, next) {
-        Bbqs
+        this.Model
             .find() // повертає вказівник на повернену колекцію документів - cursor(інкапсулюють в собі набори отриманих з БД об'єктів)
             .sort({name: 1})
             .then((bbqs) => {
@@ -31,7 +35,7 @@ class BbqsController {
     }
 
     async getOne(req, res) {
-        Bbqs
+        this.Model
             .findById(req.params.id)
             .then((doc) => {
                 res
@@ -44,7 +48,7 @@ class BbqsController {
     }
 
     async updateOne(req, res) {
-        Bbqs
+        this.Model
             .findByIdAndUpdate(req.params.id, req.body)
             .then((result) => {
                 res
@@ -57,7 +61,7 @@ class BbqsController {
     }
 
     async delete(req, res) {
-        Bbqs
+        this.Model
             .findByIdAndDelete(req.params.id)
             .then((result) => {
                 res
@@ -70,4 +74,4 @@ class BbqsController {
     }
 }
 
-module.exports = new BbqsController();
+module.exports = MenuItemsController;
