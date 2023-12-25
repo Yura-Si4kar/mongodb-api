@@ -5,7 +5,7 @@ const errorHandler = require('./middlewares/ErrorHandlingMiddleware');
 const connectToDb = require('./db');
 const cors = require('cors');
 
-const PORT = 3000;
+const PORT = 3001;
 
 const app = express();
 app.use(cors({ origin: '*' }));
