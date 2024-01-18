@@ -24,15 +24,13 @@ const categoriesSchema = new Schema({
 const tablesSchema = new Schema({
     name: {type: String, required: true},
     img: {type: String, required: true},
-    order: [{ type: Object }],
-    img: {type: String, required: false}
+    order: [{ type: Object }]
 })
 
 const personnelsSchema = new Schema({
     name: {type: String, required: true},
     salary: {type: Number, required: true},
-    position: {type: String, required: true},
-    img: {type: String, required: false}
+    position: {type: String, required: true}
 })
 
 const salesSchema = new Schema({

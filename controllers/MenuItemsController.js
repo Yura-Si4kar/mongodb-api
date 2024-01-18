@@ -11,7 +11,7 @@ class MenuItemsController {
             const list = new this.Model(req.body);
             const result = await list.save();
 
-            res.status(201).json(result);    
+            res.status(201).json(result);
         } catch (error) {
             next(ApiError.internal(error.message));
         }
@@ -47,23 +47,13 @@ class MenuItemsController {
 
     async delete(req, res, next) {
         try {
-            let result = await this.Model.findById(req.params.id);
+            const result = await this.Model.findByIdAndDelete(req.params.id);
 
             if (!result) {
                 return next(ApiError.notFound('Element not found'));
             }
 
-            if (result.img) {
-                const imagePath = path.resolve(__dirname, '..', 'static', result.img);
-                
-                if (fs.existsSync(imagePath)) {
-                    fs.unlinkSync(imagePath);
-                }                
-            }
-
-            const deletedResult = await this.Model.findByIdAndDelete(req.params.id);
-
-            res.status(200).json(deletedResult);
+            res.status(200).json(result);
         } catch (error) {
             next(ApiError.internal(error.message));
         }
